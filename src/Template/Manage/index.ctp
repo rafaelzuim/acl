@@ -20,11 +20,11 @@
             <div class="col-sm-12 col-md-12">
                 <table class="table table-striped ajaxAclUsers" id="usersTable">
                     <thead>
-                        <tr>
-                            <th>Menu</th>
-                            <th>Ação</th>
-                            <th>Status</th>
-                        </tr>
+                    <tr>
+                        <th>Menu</th>
+                        <th>Ação</th>
+                        <th>Status</th>
+                    </tr>
                     </thead>
 
                     <tbody></tbody>
