@@ -169,6 +169,7 @@
         }
 
         this.grantPermissionUser = function (controller, action, action_id,  user_id) {
+            var self = this;
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -207,7 +208,7 @@
         }
 
         this.denyPermissionUser = function (controller, action, action_id, user_id) {
-
+            var self = this;
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -246,6 +247,7 @@
         }
 
         this.grantPermissionGroup = function (controller, action, action_id , group_id) {
+            var self = this;
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -284,6 +286,7 @@
         }
 
         this.denyPermissionGroup = function (controller, action, action_id , group_id) {
+            var self = this;
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
