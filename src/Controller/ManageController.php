@@ -168,26 +168,26 @@ class ManageController extends AppController
                 if (isset($id)) {
                     $identity = $this->parseIdentifier($this->args[1]);
 
-                    $topNode = $this->{$this->$acoClass}->find('all', [
-                        'conditions' => [$this->$acoAlias . '.id' => $this->_getNodeId($this->$acoClass, $identity)]
+                    $topNode = $this->{$this->acoClass}->find('all', [
+                        'conditions' => [$this->acoAlias . '.id' => $this->_getNodeId($this->acoClass, $identity)]
                     ])->first();
 
-                    $nodes = $this->{$this->$acoClass}->find('all', [
+                    $nodes = $this->{$this->acoClass}->find('all', [
                         'conditions' => [
-                            $this->$acoAlias . '.lft >=' => $topNode->lft,
-                            $this->$acoAlias . '.lft <=' => $topNode->rght
+                            $this->acoAlias . '.lft >=' => $topNode->lft,
+                            $this->acoAlias . '.lft <=' => $topNode->rght
                         ],
-                        'order' => $this->$acoAlias . '.lft ASC'
+                        'order' => $this->acoAlias . '.lft ASC'
                     ]);
                 } else {
-                    $nodes = $this->{$this->$acoClass}->find('all', ['order' => $this->$acoAlias . '.lft ASC']);
+                    $nodes = $this->{$this->acoClass}->find('all', ['order' => $this->acoAlias . '.lft ASC']);
                 }
 
                 if ($nodes->count() === 0) {
                     if (isset($id)) {
                         $this->error(__d('cake_acl', '{0} not found', [$id]), __d('cake_acl', 'No tree returned.'));
-                    } elseif (isset($this->$acoClass)) {
-                        $this->error(__d('cake_acl', '{0} not found', [$this->$acoClass]), __d('cake_acl', 'No tree returned.'));
+                    } elseif (isset($this->acoClass)) {
+                        $this->error(__d('cake_acl', '{0} not found', [$this->acoClass]), __d('cake_acl', 'No tree returned.'));
                     }
                 }
 
