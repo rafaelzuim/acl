@@ -13,7 +13,7 @@ class AppController extends BaseController
     {
         // include all necessary assets
         $this->css_for_layout = ["Acl.bootstrap.min"];
-        $this->js_for_layout = ["Acl.jquery","Acl.app"];
+        $this->js_for_layout = ["Acl.jquery","Acl.bootstrap.min","Acl.app"];
     }
 
     public function beforeRender(Event $event)

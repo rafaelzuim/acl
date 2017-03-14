@@ -16,6 +16,7 @@ class ManageController extends AppController
         $this->loadModel("Acos");
         $this->loadModel("Aros");
         $this->loadModel("Users");
+        $this->loadModel("Groups");
     }
 
     public function index()
@@ -26,8 +27,9 @@ class ManageController extends AppController
     }
 
     public function getUserAcl($user_id = null, $id = null){
-
-
+        $this->loadModel("Acos");
+        $this->loadModel("Aros");
+        $this->loadModel("Users");
 
         $response = array("success"=>false,"msg"=>"");
         try{
@@ -117,6 +119,7 @@ class ManageController extends AppController
 
 
     public function grantPermissionUser($user_id = null){
+        $this->loadModel("Users");
         $response = array("success"=>false,"msg"=>"");
         try{
             $data = $this->request->data;
@@ -140,7 +143,7 @@ class ManageController extends AppController
     }
 
     public function denyPermissionUser($user_id = null){
-
+        $this->loadModel("Users");
         $response = array("success"=>false,"msg"=>"");
         try{
             $data = $this->request->data;
@@ -167,8 +170,6 @@ class ManageController extends AppController
         $this->loadModel("Aros");
         $this->loadModel("Groups");
 
-
-        $msg = '';
         $response = array("success"=>false,"msg"=>"");
         try{
             $conn = ConnectionManager::get('default');
@@ -258,7 +259,7 @@ class ManageController extends AppController
     }
 
     public function grantPermissionGroup($id = null){
-        $msg = '';
+        $this->loadModel("Groups");
         $response = array("success"=>false,"msg"=>"");
         try{
             $data = $this->request->data;
@@ -279,7 +280,7 @@ class ManageController extends AppController
     }
 
     public function denyPermissionGroup($id = null){
-        $msg = '';
+        $this->loadModel("Groups");
         $response = array("success"=>false,"msg"=>"");
         try{
             $data = $this->request->data;
