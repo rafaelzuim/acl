@@ -122,7 +122,7 @@
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: self.full_url + '/groups/get-acl/'+group_id,
+                url: self.full_url + '/manage/get-group-acl/'+group_id,
                 success: function (response) {
                     if (response.success == true) {
                         delete response['success'];
@@ -173,7 +173,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: {'controller': controller, 'action': action, 'action_id' :action_id},
-                url: self.full_url + '/users/grant-permission/' + user_id,
+                url: self.full_url + '/manage/grant-permission-user/' + user_id,
                 success: function (response) {
                     if (response.success == true) {
                         $(".alert-return").html(
@@ -212,7 +212,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: {'controller': controller, 'action': action, 'action_id' :action_id},
-                url: self.full_url + '/users/deny-permission/' + user_id,
+                url: self.full_url + '/manage/deny-permission-user/' + user_id,
                 success: function (response) {
                     if (response.success == true) {
                         $(".alert-return").html(
@@ -250,7 +250,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: {'controller': controller, 'action': action, 'action_id' :action_id},
-                url: self.full_url + '/groups/grant-permission/' + group_id,
+                url: self.full_url + '/manage/grant-permission-group/' + group_id,
                 success: function (response) {
                     if (response.success == true) {
                         $(".alert-return").html(
@@ -288,7 +288,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: {'controller': controller, 'action': action, 'action_id' :action_id},
-                url: self.full_url + '/groups/deny-permission/' + group_id,
+                url: self.full_url + '/manage/deny-permission-group/' + group_id,
                 success: function (response) {
                     if (response.success == true) {
                         $(".alert-return").html(
