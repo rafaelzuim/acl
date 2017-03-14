@@ -1,16 +1,16 @@
 "use strict";
 ;(function (window, document, $) {
     /**
-     * JS class to give a extra elements control in admin iugu section
+     * JS class to give a extra elements control in admin section
      * @author Rafael Caparroz Zuim <rafael.czuim@gmail.com>
-     * @company rZCode
-     * @base Iugu
      */
     function AclControl() {
+        // Plugin route
+        this.full_url = window.location.origin + "/acl",
+
         /**
          * Bind some elements to upgrade the form experience
          */
-        var reloadTableAjax = null;
 
         this.binds = function () {
             $("body").on("change", "#user-id", function (e) {
@@ -24,7 +24,6 @@
                 $(".ajaxAclGroups tr td").remove();
                 AclControl.reloadTableGroups($('#group-id').val());
             });
-
 
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 var self = this;
@@ -62,7 +61,7 @@
         };
 
         this.reloadTableUsers = function (user_id) {
-            var url_full = window.location.origin;
+
             var $table = $(".ajaxAclUsers");
             var self = this;
             $('.ajaxAclUsers tbody').html('<tr><td colspan="4"><h4 class="text-center">Carregando</h4></td></tr>');
@@ -70,7 +69,7 @@
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: url_full + '/users/get-acl/'+user_id,
+                url: self.full_url + '/manage/get-user-acl/'+user_id,
                 success: function (response) {
                     if (response.success == true) {
                         delete response['success'];
@@ -108,7 +107,6 @@
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    /** Sempre bom ter esta parte da chamada para olharmos no console os erros e em algumas situações exibir erros ao cliente **/
                     console.log(jqXHR);
                     console.log(textStatus);
                     console.log(errorThrown);
@@ -117,7 +115,6 @@
         }
 
         this.reloadTableGroups = function (group_id) {
-            var url_full = window.location.origin;
             var $table = $(".ajaxAclGroups");
             var self = this;
             $('.ajaxAclGroups tbody').html('<tr><td colspan="4"><h4 class="text-center">Carregando</h4></td></tr>');
@@ -125,7 +122,7 @@
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: url_full + '/groups/get-acl/'+group_id,
+                url: self.full_url + '/groups/get-acl/'+group_id,
                 success: function (response) {
                     if (response.success == true) {
                         delete response['success'];
@@ -172,12 +169,11 @@
         }
 
         this.grantPermissionUser = function (controller, action, action_id,  user_id) {
-            var url_full = window.location.origin;
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 data: {'controller': controller, 'action': action, 'action_id' :action_id},
-                url: url_full + '/users/grant-permission/' + user_id,
+                url: self.full_url + '/users/grant-permission/' + user_id,
                 success: function (response) {
                     if (response.success == true) {
                         $(".alert-return").html(
@@ -203,7 +199,6 @@
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    /** Sempre bom ter esta parte da chamada para olharmos no console os erros e em algumas situações exibir erros ao cliente **/
                     console.log(jqXHR);
                     console.log(textStatus);
                     console.log(errorThrown);
@@ -212,12 +207,12 @@
         }
 
         this.denyPermissionUser = function (controller, action, action_id, user_id) {
-            var url_full = window.location.origin;
+
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 data: {'controller': controller, 'action': action, 'action_id' :action_id},
-                url: url_full + '/users/deny-permission/' + user_id,
+                url: self.full_url + '/users/deny-permission/' + user_id,
                 success: function (response) {
                     if (response.success == true) {
                         $(".alert-return").html(
@@ -243,7 +238,6 @@
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    /** Sempre bom ter esta parte da chamada para olharmos no console os erros e em algumas situações exibir erros ao cliente **/
                     console.log(jqXHR);
                     console.log(textStatus);
                     console.log(errorThrown);
@@ -252,12 +246,11 @@
         }
 
         this.grantPermissionGroup = function (controller, action, action_id , group_id) {
-            var url_full = window.location.origin;
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 data: {'controller': controller, 'action': action, 'action_id' :action_id},
-                url: url_full + '/groups/grant-permission/' + group_id,
+                url: self.full_url + '/groups/grant-permission/' + group_id,
                 success: function (response) {
                     if (response.success == true) {
                         $(".alert-return").html(
@@ -283,7 +276,6 @@
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    /** Sempre bom ter esta parte da chamada para olharmos no console os erros e em algumas situações exibir erros ao cliente **/
                     console.log(jqXHR);
                     console.log(textStatus);
                     console.log(errorThrown);
@@ -292,12 +284,11 @@
         }
 
         this.denyPermissionGroup = function (controller, action, action_id , group_id) {
-            var url_full = window.location.origin;
             return $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 data: {'controller': controller, 'action': action, 'action_id' :action_id},
-                url: url_full + '/groups/deny-permission/' + group_id,
+                url: self.full_url + '/groups/deny-permission/' + group_id,
                 success: function (response) {
                     if (response.success == true) {
                         $(".alert-return").html(
@@ -323,7 +314,6 @@
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    /** Sempre bom ter esta parte da chamada para olharmos no console os erros e em algumas situações exibir erros ao cliente **/
                     console.log(jqXHR);
                     console.log(textStatus);
                     console.log(errorThrown);
@@ -332,9 +322,7 @@
         }
 
         this.init = function(){
-
-            var reloadTableUsers = AclControl.reloadTableUsers($('#user-id').val());
-
+            AclControl.reloadTableUsers($('#user-id').val());
         }
 
         /**
