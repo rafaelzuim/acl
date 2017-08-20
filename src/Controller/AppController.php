@@ -18,6 +18,7 @@ class AppController extends BaseController
 
     public function beforeRender(Event $event)
     {
+
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
@@ -28,6 +29,4 @@ class AppController extends BaseController
         // Adiciona todo o css a variável que será passada ao layout
         $this->set('front_css', $this->css_for_layout);
     }
-
-
 }
