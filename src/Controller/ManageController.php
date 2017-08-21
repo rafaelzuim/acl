@@ -44,6 +44,8 @@ class ManageController extends AppController
                 'prefix' => false
             ],
         ]);
+
+        
         $this->Auth->Allow("Unauthorized");
         $this->load = ["Acos", "Aros", "Users", "Groups"];
         $tables = ConnectionManager::get('default')->schemaCollection()->listTables();
